@@ -22,6 +22,8 @@ build() {
 
   #yarn add -D @tauri-apps/cli && yarn install
 
+
+  cd src-tauri
   cargo build --release --bin cursor-overlay-x86_64-unknown-linux-gnu
   
   #npm install
