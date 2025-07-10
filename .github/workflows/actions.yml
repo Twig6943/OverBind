@@ -30,6 +30,11 @@ jobs:
           curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
           chown builder:builder /home/builder/build/PKGBUILD
 
+      - name: Download source tarball
+        run: |
+          curl -L -o /home/builder/build/overbind-1.5.1.tar.gz https://github.com/Twig6943/OverBind/archive/refs/tags/v1.5.1.tar.gz
+          chown builder:builder /home/builder/build/overbind-1.5.1.tar.gz
+
       - name: Build package as builder user
         run: |
           runuser -u builder -- bash -c "cd /home/builder/build && makepkg --noconfirm --syncdeps --clean"
