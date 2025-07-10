@@ -4,26 +4,31 @@ pkgver=1.5.1
 pkgrel=1
 pkgdesc="A Rust + Tauri-based input remapping tool"
 arch=('x86_64')
-url="https://github.com/yourusername/overbind" # Replace with actual URL
-license=('MIT') # or as appropriate
+url="https://github.com/Twig6943/OverBind"
+license=('MIT')
 depends=('gtk3' 'libayatana-appindicator' 'webkit2gtk' 'glibc')
-makedepends=('rust' 'npm' 'nodejs' 'yarn')
-source=("$pkgname-$pkgver.tar.gz") # or use git source
-sha256sums=('SKIP') # Replace if using a tarball with checksum
+makedepends=('rust' 'npm' 'nodejs' 'yarn' 'git')
+
+source=("git+https://github.com/Twig6943/OverBind.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/OverBind"
+  # Get latest tag or short commit hash as version
+  git describe --tags --always | sed 's/^v//; s/-/./g'
+}
 
 build() {
-  # Find the extracted directory dynamically (should be exactly one folder matching OverBind*)
-  srcdir_folder=$(find "$srcdir" -maxdepth 1 -type d -name "OverBind*")
-  cd "$srcdir_folder"
+  cd "$srcdir/OverBind"
 
   export NODE_ENV=production
+
   npm install
   npm run tauri build
 }
 
 package() {
-  srcdir_folder=$(find "$srcdir" -maxdepth 1 -type d -name "OverBind*")
-  cd "$srcdir_folder"
+  cd "$srcdir/OverBind"
 
   install -Dm755 "src-tauri/target/release/overbind" "$pkgdir/usr/bin/overbind"
 }
