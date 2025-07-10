@@ -20,7 +20,7 @@ build() {
   cd "$srcdir/OverBind"
   export NODE_ENV=production
 
-  yarn add -D @tauri-apps/cli && yarn install
+  #yarn add -D @tauri-apps/cli && yarn install
   npm install
   npm run tauri build
 }
