@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator tauri-cli
+          pacman -S --noconfirm git rust nodejs npm gtk3 webkit2gtk libayatana-appindicator tauri-cli
           
       - name: Create builder user and build directory
         run: |
