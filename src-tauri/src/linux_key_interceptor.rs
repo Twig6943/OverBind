@@ -545,7 +545,7 @@ impl KeyInterceptorTrait for LinuxKeyInterceptor {
                         Command::new("cargo")
                             .arg("run")
                             .arg("--bin")
-                            .arg("cursor-overlay-x86_64-unknown-linux-gnu")
+                            .arg("cursor-overlay")
                             .spawn()
                             .expect("Failed to start cursor overlay"),
                     )
