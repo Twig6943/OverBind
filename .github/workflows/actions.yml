@@ -18,7 +18,7 @@ jobs:
         run: |
           pacman -Sy --noconfirm archlinux-keyring
           pacman -Syu --noconfirm
-          pacman -S --noconfirm git rust nodejs npm gtk3 webkit2gtk libayatana-appindicator base-devel
+          pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator base-devel
 
       - name: Create builder user and install tauri-cli
         run: |
