@@ -21,13 +21,15 @@ build() {
   export NODE_ENV=production
 
   #yarn add -D @tauri-apps/cli && yarn install
-  npm install
-  
-  cd src-tauri
+
   cargo build --release --bin cursor-overlay-x86_64-unknown-linux-gnu
-  cd ..
   
-  npm run tauri build
+  #npm install
+  
+  #cd src-tauri
+  #cd ..
+  
+  #npm run tauri build
 }
 
 package() {
