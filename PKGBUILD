@@ -12,7 +12,7 @@ source=("$pkgname-$pkgver.tar.gz") # or use git source
 sha256sums=('SKIP') # Replace if using a tarball with checksum
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/${pkgname^}-$pkgver"
 
   export NODE_ENV=production
 
