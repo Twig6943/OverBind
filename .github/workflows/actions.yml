@@ -14,12 +14,12 @@ jobs:
       image: archlinux:base-devel
 
     steps:
-      - name: Update system and install dependencies
+      - name: Install dependencies
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator
 
-      - name: Create non-root user and build directory
+      - name: Create builder user and build directory
         run: |
           useradd -m builder
           mkdir -p /home/builder/build
@@ -29,11 +29,6 @@ jobs:
         run: |
           curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
           chown builder:builder /home/builder/build/PKGBUILD
-
-      - name: Download source tarball
-        run: |
-          curl -L -o /home/builder/build/overbind-1.5.1.tar.gz https://github.com/Twig6943/OverBind/archive/refs/tags/v1.5.1.tar.gz
-          chown builder:builder /home/builder/build/overbind-1.5.1.tar.gz
 
       - name: Build package as builder user
         run: |
