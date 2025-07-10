@@ -14,14 +14,19 @@ jobs:
       image: archlinux:base-devel
 
     steps:
-      - name: Install dependencies
+      - name: Update system and install dependencies
         run: |
+          pacman -Sy --noconfirm archlinux-keyring
           pacman -Syu --noconfirm
-          pacman -S --noconfirm git rust nodejs npm gtk3 webkit2gtk libayatana-appindicator tauri-cli
-          
-      - name: Create builder user and build directory
+          pacman -S --noconfirm git rust nodejs npm gtk3 webkit2gtk libayatana-appindicator base-devel
+
+      - name: Create builder user and install tauri-cli
         run: |
           useradd -m builder
+          runuser -u builder -- bash -c "source /etc/profile; cargo install tauri-cli"
+
+      - name: Prepare build directory
+        run: |
           mkdir -p /home/builder/build
           chown -R builder:builder /home/builder
 
