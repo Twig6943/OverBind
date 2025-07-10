@@ -12,24 +12,18 @@ source=("$pkgname-$pkgver.tar.gz") # or use git source
 sha256sums=('SKIP') # Replace if using a tarball with checksum
 
 build() {
-  cd "$srcdir/${pkgname^}-$pkgver"
+  # Find the extracted directory dynamically (should be exactly one folder matching OverBind*)
+  srcdir_folder=$(find "$srcdir" -maxdepth 1 -type d -name "OverBind*")
+  cd "$srcdir_folder"
 
   export NODE_ENV=production
-
-  # install JS dependencies
   npm install
-
-  # compile with Tauri
   npm run tauri build
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  srcdir_folder=$(find "$srcdir" -maxdepth 1 -type d -name "OverBind*")
+  cd "$srcdir_folder"
 
-  # Find the built binary (adjust if different)
   install -Dm755 "src-tauri/target/release/overbind" "$pkgdir/usr/bin/overbind"
-
-  # Optional: install desktop entry and icon
-  #install -Dm644 "resources/linux/overbind.desktop" "$pkgdir/usr/share/applications/overbind.desktop"
-  #install -Dm644 "resources/icon.png" "$pkgdir/usr/share/pixmaps/overbind.png"
 }
