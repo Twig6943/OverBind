@@ -36,10 +36,12 @@ jobs:
           chown -R builder:builder /home/builder/build
           cd /home/builder/build
           runuser -u builder -- bash -c "cd /home/builder/build && yarn add -D @tauri-apps/cli && yarn install"
+          runuser -u builder -- bash -c "ln -s /usr/lib/pkgconfig/javascriptcoregtk-4.0.pc /usr/lib/pkgconfig/javascriptcoregtk-4.1.pc"
           #curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
           #chown builder:builder /home/builder/build/PKGBUILD
           
 
       - name: Build package as builder user
         run: |
-          runuser -u builder -- bash -c "export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build && makepkg --noconfirm --syncdeps --clean"
+          runuser -u builder -- bash -c "export PKG_CONFIG_PATH=/usr/lib/pkgconfig:\$PKG_CONFIG_PATH && export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build && makepkg --noconfirm --syncdeps --clean"
+
