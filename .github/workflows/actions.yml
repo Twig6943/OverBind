@@ -1,11 +1,25 @@
+name: Build OverBind PKGBUILD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     container:
       image: archlinux:base-devel
 
     steps:
-      - name: Setup user and build dir
+      - name: Update system and install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator
+
+      - name: Create non-root user and build directory
         run: |
           useradd -m builder
           mkdir -p /home/builder/build
