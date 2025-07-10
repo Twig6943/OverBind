@@ -35,11 +35,10 @@ jobs:
           git clone https://github.com/Twig6943/OverBind.git /home/builder/build
           chown -R builder:builder /home/builder/build
           cd /home/builder/build
+          ln -sf /usr/lib/pkgconfig/javascriptcoregtk-4.0.pc /usr/lib/pkgconfig/javascriptcoregtk-4.1.pc
           runuser -u builder -- bash -c "cd /home/builder/build && yarn add -D @tauri-apps/cli && yarn install"
-          runuser -u builder -- bash -c "ln -s /usr/lib/pkgconfig/javascriptcoregtk-4.0.pc /usr/lib/pkgconfig/javascriptcoregtk-4.1.pc"
           #curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
-          #chown builder:builder /home/builder/build/PKGBUILD
-          
+          #chown builder:builder /home/builder/build/PKGBUILD       
 
       - name: Build package as builder user
         run: |
