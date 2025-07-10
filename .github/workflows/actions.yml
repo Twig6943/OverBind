@@ -32,7 +32,8 @@ jobs:
 
       - name: Download PKGBUILD
         run: |
-          git clone https://github.com/Twig6943/OverBind.git
+          git clone https://github.com/Twig6943/OverBind.git /home/builder/build
+          cd /home/builder/build
           yarn add -D @tauri-apps/cli && yarn install
           #curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
           #chown builder:builder /home/builder/build/PKGBUILD
