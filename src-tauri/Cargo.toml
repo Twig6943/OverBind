@@ -34,7 +34,7 @@ name = "overbind"
 path = "src/main.rs"
 
 [[bin]]
-name = "cursor-overlay-x86_64-unknown-linux-gnu"
+name = "cursor-overlay"
 path = "src/cursor_overlay.rs"
 
 [target."cfg(windows)".dependencies]
