@@ -18,7 +18,8 @@ jobs:
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator
-
+          cargo install tauri-cli
+          
       - name: Create builder user and build directory
         run: |
           useradd -m builder
