@@ -41,4 +41,4 @@ jobs:
 
       - name: Build package as builder user
         run: |
-          runuser -u builder -- bash -c "export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build && makepkg --noconfirm --syncdeps --clean"
+          runuser -u builder -- bash -c "export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build/OverBind && makepkg --noconfirm --syncdeps --clean"
