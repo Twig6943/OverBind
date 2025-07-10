@@ -23,7 +23,7 @@ jobs:
       - name: Create builder user and install tauri-cli
         run: |
           useradd -m builder
-          runuser -u builder -- bash -c "source /etc/profile; cargo install tauri-cli"
+          #runuser -u builder -- bash -c "source /etc/profile; cargo install tauri-cli"
 
       - name: Prepare build directory
         run: |
