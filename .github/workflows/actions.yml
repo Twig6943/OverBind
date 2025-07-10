@@ -1,40 +1,21 @@
-name: Build OverBind PKGBUILD
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-
 jobs:
   build:
-    name: Build PKGBUILD on Arch Linux
     runs-on: ubuntu-latest
-
     container:
       image: archlinux:base-devel
 
     steps:
-      - name: Install base-devel and dependencies
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm git rust nodejs npm yarn gtk3 webkit2gtk libayatana-appindicator
-
-      - name: Create build user
+      - name: Setup user and build dir
         run: |
           useradd -m builder
-          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          chown -R builder .
-
-      - name: Fetch PKGBUILD
-        run: |
           mkdir -p /home/builder/build
-          cd /home/builder/build
-          curl -LO https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
-        shell: bash
+          chown -R builder:builder /home/builder
 
-      - name: Build package
+      - name: Download PKGBUILD
         run: |
-          cd /home/builder/build
-          sudo -u builder makepkg -si --noconfirm
-        shell: bash
+          curl -Lo /home/builder/build/PKGBUILD https://raw.githubusercontent.com/Twig6943/OverBind/refs/heads/master/PKGBUILD
+          chown builder:builder /home/builder/build/PKGBUILD
+
+      - name: Build package as builder user
+        run: |
+          runuser -u builder -- bash -c "cd /home/builder/build && makepkg --noconfirm --syncdeps --clean"
