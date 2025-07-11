@@ -43,5 +43,5 @@ jobs:
 
       - name: Build package as builder user
         run: |
-          runuser -u builder -- bash -c "export PKG_CONFIG_PATH=/usr/lib/pkgconfig:\$PKG_CONFIG_PATH && export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build/arch/ && makepkg --noconfirm --syncdeps --clean"
+          runuser -u builder -- bash -c "export PKG_CONFIG_PATH=/usr/lib/pkgconfig:\$PKG_CONFIG_PATH && export PATH=\$HOME/.cargo/bin:\$PATH && cd /home/builder/build/pkg/arch/ && makepkg --noconfirm --syncdeps --clean"
 
