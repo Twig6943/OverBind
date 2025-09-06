@@ -7,7 +7,7 @@ pkgdesc="A Rust + Tauri-based input remapping tool (DEB repack)"
 arch=('x86_64')
 url="https://github.com/cjonas1999/OverBind"
 license=('MIT')
-depends=('gtk3' 'libayatana-appindicator' 'webkit2gtk' 'glibc')
+depends=('gtk3' 'libayatana-appindicator' 'webkit2gtk' 'webkit2gtk-4.1' 'glibc')
 options=(!strip)  # Avoid stripping just in case the binary is pre-stripped
 
 source=("https://github.com/cjonas1999/OverBind/releases/download/${pkgver}/OverBind_${pkgver}_amd64.deb")
